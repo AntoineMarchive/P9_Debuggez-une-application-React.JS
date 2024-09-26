@@ -11,9 +11,8 @@ const Slider = () => {
   const [index, setIndex] = useState(0);
 
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
- // ancien code => new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
- // Correction pour afficher du plus ancien au plus récent
-    new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
+  // affichage du plus ancien au plus ressent //
+    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
 
   /** ancien code => 
