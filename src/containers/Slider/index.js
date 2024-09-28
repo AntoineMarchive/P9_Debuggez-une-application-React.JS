@@ -12,7 +12,7 @@ const Slider = () => {
 
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
   // affichage du plus ancien au plus ressent //
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    new Date(evtA.date) < new Date(evtB.date) ? +1 : 1
   );
 
   /** ancien code => 
@@ -30,7 +30,7 @@ const Slider = () => {
   const nextCard = () => {
     setTimeout(
       // Ajout de -1 après "length"
-      () => setIndex(index < dataLength - 1 ? index + 1 : 0),
+      () => setIndex(index < dataLength - 1 ? index  + 1 : 0),
       5000
     );
   };
@@ -69,6 +69,7 @@ const Slider = () => {
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
+              // onChange={() => setIndex(radioIdx)} // Mise à jour de l'index lorsqu'un bouton est cliqué
               // checked={idx === radioIdx} correction idx => index 
               readOnly
               // console error : Warning: You provided a `checked` prop to a form field without an `onChange` handler. 
