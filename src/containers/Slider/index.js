@@ -64,7 +64,7 @@ const Slider = () => {
           {byDateDesc?.map((event, radioIdx) => (
           // {byDateDesc.map((_, radioIdx)
             <input
-              key={event.title}
+              key={`${event.title}_${event.date}`}
               // key={`${event.id}`} correction event n'a pas d'id
               type="radio"
               name="radio-button"
