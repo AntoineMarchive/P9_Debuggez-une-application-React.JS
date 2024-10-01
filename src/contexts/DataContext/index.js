@@ -12,8 +12,8 @@ const DataContext = createContext({
   last: {
     cover: "",
     title: "",
-    date: ""
-  }
+    date: "",
+  },
 });
 
 export const api = {
@@ -29,7 +29,7 @@ export const DataProvider = ({ children }) => {
   const getData = useCallback(async () => {
     try {
       const fetchedData = await api.loadData();
-    console.log("Fetched Data:", fetchedData);
+      console.log("Fetched Data:", fetchedData);
       setData(await api.loadData());
     } catch (err) {
       setError(err);
@@ -39,7 +39,7 @@ export const DataProvider = ({ children }) => {
     if (data) return;
     getData();
   });
-  
+
   return (
     <DataContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -48,7 +48,12 @@ export const DataProvider = ({ children }) => {
         error,
         // test //
         // "last" est défini comme le dernier événement dans les données, s'il existe
-        last: data && data.events ? data.events[data.events.length - 1] : {}
+        last:
+          data && data.events
+            ? data.events.sort((evtA, evtB) =>
+                new Date(evtA.date) - new Date(evtB.date)
+              )[data.events.length - 1]
+            : {},
       }}
     >
       {children}
@@ -58,7 +63,7 @@ export const DataProvider = ({ children }) => {
 
 DataProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
 export const useData = () => useContext(DataContext);
 
